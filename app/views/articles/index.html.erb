@@ -1,0 +1,12 @@
+<% @articles.each do |article| %>
+  <p>
+    <%= article.title + ": " + article.content %>
+    <%= form_for(article, method: :delete) do |f| %>
+      <%= f.submit :Delete %>
+      <%= link_to('Edit Article', edit_article_path(article)) %>
+    <% end %>
+
+  </p>
+
+
+<% end %>
