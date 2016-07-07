@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+
+
   def show
     @article = Article.find(params[:id])
   end
@@ -8,8 +10,14 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.create(params[:article])
-    redirect_to(action: :index)
+    @article = Article.new(params[:article])
+
+    if @article.save
+      redirect_to(action: :index)
+    else
+      flash.now[:error] = "Give title and content"
+      render :new
+    end
   end
 
   def edit
@@ -22,9 +30,12 @@ class ArticlesController < ApplicationController
     @article.title = params[:article][:title]
     @article.content = params[:article][:content]
 
-    @article.save
-
-    redirect_to(action: :index)
+    if @article.save
+      redirect_to(action: :index)
+    else
+      flash.now[:error] = "Give title and content"
+      render :new
+    end
   end
 
   def destroy
