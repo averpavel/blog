@@ -33,7 +33,7 @@ class ArticlesController < ApplicationController
     if @article.save
       redirect_to(action: :index)
     else
-      flash.now[:error] = "Please give at least 4 letters for Title and 10 letters for Content"
+      flash.now[:error] = "Please give at least 10 letters for Title and 10 letters for Content"
       render :new
     end
   end
